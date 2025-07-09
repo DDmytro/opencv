@@ -273,7 +273,10 @@ enum
 @param templateImage single-channel template image; CV_8U or CV_32F array.
 @param inputImage single-channel input image to be warped to provide an image similar to
  templateImage, same type as templateImage.
-@param inputMask An optional mask to indicate valid values of inputImage.
+@param inputMask inputMask optional single channel mask. If the data type is #CV_8U or #CV_16U the mask is interpreted as a binary mask,
+       meaning only elements where mask is nonzero are used and are kept unchanged independent of the actual mask value
+       (weight equals 1). For data type #CV_32F or #CV_64F, the mask values are used as weights.
+       The exact formulas are documented in #computeECC.
 
 @sa
 findTransformECC
@@ -305,7 +308,10 @@ order to provide an image similar to templateImage, same type as templateImage.
 criteria.epsilon defines the threshold of the increment in the correlation coefficient between two
 iterations (a negative criteria.epsilon makes criteria.maxcount the only termination criterion).
 Default values are shown in the declaration above.
-@param inputMask An optional mask to indicate valid values of inputImage.
+@param inputMask optional single channel mask. If the data type is #CV_8U or #CV_16U the mask is interpreted as a binary mask,
+       meaning only elements where mask is nonzero are used and are kept unchanged independent of the actual mask value
+       (weight equals 1). For data type #CV_32F or #CV_64F, the mask values are used as weights.
+       The exact formulas are documented in #computeECC.
 @param gaussFiltSize An optional value indicating size of gaussian blur filter; (DEFAULT: 5)
 
 The function estimates the optimum transformation (warpMatrix) with respect to ECC criterion
